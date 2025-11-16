@@ -5,88 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AdsOnStream</title>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: #000;
+      background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
       color: #fff;
       font-family: "Montserrat", sans-serif;
       text-align: center;
     }
 
-    /* Container for the whole page */
     .container {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding-top: 50px;
+      padding: 60px 20px;
     }
 
-    /* Twitch block */
     .twitch-wrapper {
-      width: 80%;
+      width: 85%;
       max-width: 900px;
-      margin: 0 auto 60px auto;
+      margin: 0 auto 50px auto;
     }
 
     .twitch-player {
       width: 100%;
-      height: 450px;
-      background: #fff; /* fallback white area like your mock */
-      border-radius: 8px;
+      height: 460px;
+      background: #111;
+      border-radius: 14px;
       overflow: hidden;
+      border: 2px solid #fff;
+      box-shadow: 0 0 35px rgba(255, 255, 255, 0.12);
     }
 
-    /* Branding */
     .title {
-      font-size: 60px;
-      font-weight: 600;
-      margin-top: 10px;
+      font-size: 64px;
+      font-weight: 700;
+      margin-top: 15px;
+      letter-spacing: -1px;
     }
 
     .subtitle {
-      font-size: 16px;
-      margin-top: 5px;
-      opacity: 0.7;
+      font-size: 18px;
+      margin-top: 8px;
+      opacity: 0.75;
     }
 
-    /* Contact section */
     .contact {
-      margin-top: 40px;
-      font-size: 32px;
+      margin-top: 50px;
+      font-size: 30px;
       font-weight: 400;
     }
 
     .email {
-      margin-top: 10px;
-      font-size: 42px;
+      margin-top: 12px;
+      font-size: 40px;
+      font-weight: 300;
       word-break: break-word;
     }
 
-    /* Mobile tweaks */
     @media (max-width: 700px) {
-      .title {
-        font-size: 42px;
-      }
-      .email {
-        font-size: 32px;
-      }
-      .twitch-player {
-        height: 260px;
-      }
+      .title { font-size: 44px; }
+      .email { font-size: 28px; }
+      .twitch-player { height: 260px; }
     }
-  </style>
+  .logo {
+      font-size: 26px;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      opacity: 0.9;
+      letter-spacing: -0.5px;
+    }
+
+    </style>
 </head>
 
 <body>
-
+  <div class="logo">AdsOnStream</div>
   <div class="container">
 
-    <!-- Twitch Embed -->
     <div class="twitch-wrapper">
       <div class="twitch-player">
         <iframe
@@ -100,15 +100,12 @@
       </div>
     </div>
 
-    <!-- Branding -->
     <div class="title">AdsOnStream</div>
     <div class="subtitle">we only stream ads</div>
 
-    <!-- Contact -->
     <div class="contact">contact info:</div>
     <div class="email">ads@adsonstream.xyz</div>
 
   </div>
-
 </body>
 </html>
