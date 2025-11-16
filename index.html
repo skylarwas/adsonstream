@@ -1,108 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AdsOnStream</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --bg:#000;
-      --white:#ffffff;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0}
-    body{
-      background:var(--bg);
-      color:var(--white);
-      font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
-      padding:6vh 4vw;
-    }
-    .wrap{
-      width:100%;
-      max-width:1200px;
-      text-align:center;
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      font-family: "Montserrat", sans-serif;
+      text-align: center;
     }
 
-    .video-placeholder{
-      background:#111;
-      border-radius:8px;
-      margin:0 auto 2.5vh;
-      width:75%;
-      min-height:350px;
-      max-height:50vh;
-      display:flex;
-      overflow:hidden;
-      box-shadow:0 0 22px rgba(0,0,0,0.6);
-    }
-    iframe{
-      width:100%;
-      height:100%;
-      border:0;
+    /* Container for the whole page */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 50px;
     }
 
-    .brand{
-      font-size:96px;
-      font-weight:900;
-      margin-top:24px;
-      margin-bottom:10px;
-    }
-    .tag{
-      font-size:16px;
-      opacity:0.85;
-      margin-bottom:30px;
+    /* Twitch block */
+    .twitch-wrapper {
+      width: 80%;
+      max-width: 900px;
+      margin: 0 auto 60px auto;
     }
 
-    .contact-title{
-      font-size:48px;
-      font-weight:300;
-      margin:18px 0 8px;
-    }
-    .email{
-      font-size:52px;
-      font-weight:300;
-      margin:0;
-      word-break:break-word;
+    .twitch-player {
+      width: 100%;
+      height: 450px;
+      background: #fff; /* fallback white area like your mock */
+      border-radius: 8px;
+      overflow: hidden;
     }
 
-    @media (max-width:900px){
-      .video-placeholder{width:90%; min-height:240px}
-      .brand{font-size:64px}
-      .contact-title{font-size:32px}
-      .email{font-size:34px}
+    /* Branding */
+    .title {
+      font-size: 60px;
+      font-weight: 600;
+      margin-top: 10px;
     }
 
-    @media (max-width:480px){
-      .brand{font-size:48px}
-      .video-placeholder{min-height:190px}
-      .contact-title{font-size:24px}
-      .email{font-size:26px}
+    .subtitle {
+      font-size: 16px;
+      margin-top: 5px;
+      opacity: 0.7;
+    }
+
+    /* Contact section */
+    .contact {
+      margin-top: 40px;
+      font-size: 32px;
+      font-weight: 400;
+    }
+
+    .email {
+      margin-top: 10px;
+      font-size: 42px;
+      word-break: break-word;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 700px) {
+      .title {
+        font-size: 42px;
+      }
+      .email {
+        font-size: 32px;
+      }
+      .twitch-player {
+        height: 260px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="video-placeholder" role="region" aria-label="embedded twitch stream">
-      <iframe
-        src="https://player.twitch.tv/?channel=adsonstream&parent=adsonstream.xyz&parent=www.adsonstream.xyz&parent=skylarwas.github.io&muted=true"
-        height="100%"
-        width="100%"
-        frameborder="0"
-        allowfullscreen>
-      </iframe>
-    </div>
+
+  <div class="container">
+
+    <!-- Twitch Embed -->
+    <div class="twitch-wrapper">
+      <div class="twitch-player">
+        <iframe
+          src="https://player.twitch.tv/?channel=adsonstream&parent=adsonstream.xyz&parent=skylarwas.github.io"
+          frameborder="0"
+          allowfullscreen="true"
+          scrolling="no"
+          height="100%"
+          width="100%">
+        </iframe>
+      </div>
     </div>
 
-    <div class="brand">AdsOnStream</div>
-    <div class="tag">we only stream ads</div>
+    <!-- Branding -->
+    <div class="title">AdsOnStream</div>
+    <div class="subtitle">we only stream ads</div>
 
-    <div class="contact-title">contact info:</div>
+    <!-- Contact -->
+    <div class="contact">contact info:</div>
     <div class="email">ads@adsonstream.xyz</div>
+
   </div>
+
 </body>
 </html>
