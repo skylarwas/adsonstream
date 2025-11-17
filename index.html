@@ -96,38 +96,16 @@
     </div>
 
     <div class="right">
+      
       <div class="stream-box">
         <!-- Twitch Stream Embed -->
-        <iframe
-          src="https://player.twitch.tv/?channel=AdsOnStream&parent=adsonstream.xyz&parent=skylarwas.github.io&autoplay=true"
-          height="100%" width="100%" allowfullscreen>
+        <iframe$1 style="border:none; outline:none;" >
         </iframe>
       </div>
       <div class="chat-box">
         <!-- Twitch Chat Embed -->
-        <iframe
-          src="https://www.twitch.tv/embed/AdsOnStream/chat?parent=adsonstream.xyz&parent=skylarwas.github.io"
-          height="100%" width="100%">
+        <iframe$1 style="border:none; outline:none;" >
         </iframe>
       </div>
     </div>
   </div>
-
-
-  <!-- Stripe JS -->
-  <script src="https://js.stripe.com/v3"></script>
-
-  <!-- Simple Stripe payment button placeholder -->
-  <script>
-    // Example Stripe setup (client-side placeholder)
-    // You will later replace this with a backend endpoint
-    const stripe = Stripe("pk_test_yourPublicKeyHere");
-
-    function buyAd() {
-      fetch("/create-checkout-session", { method: "POST" })
-        .then(res => res.json())
-        .then(data => stripe.redirectToCheckout({ sessionId: data.id }));
-    }
-  </script>
-</body>
-</html>
