@@ -60,8 +60,8 @@
     .right::before{top:80px}
     .right::after{bottom:80px}
 
-    .stream-box{flex:1;width:92%;display:flex;align-items:center;justify-content:center;font-size:34px}
-    .chat-box{height:260px;width:92%;display:flex;align-items:center;justify-content:center;font-size:28px}
+    .stream-box{width:100%;height:40vh;display:flex;align-items:center;justify-content:center;font-size:34px;padding:0;margin:0;}
+    .chat-box{width:100%;height:60vh;display:flex;align-items:center;justify-content:center;font-size:28px;padding:0;margin:0;}
 
     /* small 24/7 button at top */
     .small-btn{position:absolute;top:6px;left:calc(var(--left-width) - 48px);transform:translateX(-50%);background:#fff;color:#000;padding:8px 12px;border-radius:2px;font-weight:700}
@@ -104,8 +104,8 @@
         <script>
           // Initialize Twitch Embed
           new Twitch.Embed("twitch-embed", {
-            width: "108%",
-            height: "150%",
+            width: "100%",
+            height: "250%",
             channel: "AdsOnStream",
             parent: ["adsonstream.xyz","skylarwas.github.io"],
             autoplay: true
@@ -119,6 +119,3 @@
       </div>
     </div>
   </div>
-  </script>
-</body>
-</html>
