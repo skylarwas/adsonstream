@@ -1,111 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AdsOnStream</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AdsOnStream — mockup</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
-      color: #fff;
-      font-family: "Montserrat", sans-serif;
-      text-align: center;
+    @font-face{
+      font-family: 'StretchPro';
+      src: url('StretchPro.otf') format('opentype');
+    }
+    :root{
+      --left-width:64%;
+      --right-width:36%;
+      --bg-top:#0a0a0a;
+      --bg-bottom:#2b2b2b;
+      --accent:#ffffff;
+      --button-height:92px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'StretchPro', Arial, Helvetica, sans-serif;color:var(--accent)}
+
+    .page{
+      display:flex;min-height:100vh;align-items:stretch;
+      background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
     }
 
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 20px;
+    .left{
+      width:var(--left-width);padding:40px 60px;display:flex;flex-direction:column;gap:36px;position:relative;
     }
 
-    .twitch-wrapper {
-      width: 85%;
-      max-width: 900px;
-      margin: 0 auto 50px auto;
+    .logo{font-weight:900;font-size:44px;letter-spacing:2px;margin:4px 0}
+
+    .headline{
+      font-size:64px;line-height:0.95;font-weight:800;max-width:90%;
+      text-transform:none;letter-spacing:1px;margin-top:30px;
     }
 
-    .twitch-player {
-      width: 100%;
-      height: 460px;
-      background: #111;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 2px solid #fff;
-      box-shadow: 0 0 35px rgba(255, 255, 255, 0.12);
+    .controls{display:flex;flex-direction:column;gap:28px;margin-top:10px}
+
+    .big-btn{
+      background:#fff;color:#000;border:0;padding:0 28px;height:var(--button-height);
+      display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:700;
+      box-shadow:0 0 0 6px rgba(0,0,0,0.2) inset;border-radius:2px;cursor:pointer;text-decoration:none;
     }
 
-    .title {
-      font-size: 64px;
-      font-weight: 700;
-      margin-top: 15px;
-      letter-spacing: -1px;
+    /* make the buttons look similar to the rounded font in the image by slightly increasing letter spacing */
+    .big-btn .inner{letter-spacing:1px}
+
+    /* right column */
+    .right{
+      width:var(--right-width);background:#fff;color:#000;padding:20px;display:flex;flex-direction:column;align-items:center;gap:20px;position:relative;
+      overflow:hidden;
     }
 
-    .subtitle {
-      font-size: 18px;
-      margin-top: 8px;
-      opacity: 0.75;
+    /* create the notched bracket shapes on the left side of the white panel */
+    .right::before, .right::after{
+      content:"";position:absolute;left:-48px;width:96px;background:#fff;height:160px;border-radius:0 80px 80px 0;transform:translateX(-10px);
     }
+    .right::before{top:80px}
+    .right::after{bottom:80px}
 
-    .contact {
-      margin-top: 50px;
-      font-size: 30px;
-      font-weight: 400;
-    }
+    .stream-box{flex:1;width:92%;display:flex;align-items:center;justify-content:center;font-size:34px}
+    .chat-box{height:260px;width:92%;display:flex;align-items:center;justify-content:center;font-size:28px}
 
-    .email {
-      margin-top: 12px;
-      font-size: 40px;
-      font-weight: 300;
-      word-break: break-word;
-    }
+    /* small 24/7 button at top */
+    .small-btn{position:absolute;top:6px;left:calc(var(--left-width) - 48px);transform:translateX(-50%);background:#fff;color:#000;padding:8px 12px;border-radius:2px;font-weight:700}
 
-    @media (max-width: 700px) {
-      .title { font-size: 44px; }
-      .email { font-size: 28px; }
-      .twitch-player { height: 260px; }
+    /* responsive */
+    @media (max-width:900px){
+      :root{--left-width:60%;--right-width:40%}
+      .headline{font-size:40px}
+      .big-btn{font-size:36px;height:64px}
     }
-  .logo {
-      font-size: 26px;
-      font-weight: 600;
-      margin-top: 20px;
-      margin-bottom: 10px;
-      opacity: 0.9;
-      letter-spacing: -0.5px;
+    @media (max-width:640px){
+      .page{flex-direction:column}
+      .left,.right{width:100%}
+      .right{order:2}
+      .small-btn{left:14px;transform:none}
     }
-
-    </style>
+  </style>
 </head>
-
 <body>
-  <div class="logo">AdsOnStream</div>
-  <div class="container">
+  <div class="page">
+    <div class="left">
+      <div class="logo">AdsOnStream</div>
+      <h1 class="headline">We only stream ads<br>that people pay for.</h1>
 
-    <div class="twitch-wrapper">
-      <div class="twitch-player">
+      <div class="controls">
+        <a class="big-btn" href="#buy"><span class="inner">buy an ad</span></a>
+        <a class="big-btn" href="#contact"><span class="inner">Contact</span></a>
+        <a class="big-btn" href="#queue"><span class="inner">Queue</span></a>
+        <a class="big-btn" href="#donate"><span class="inner">Donate</span></a>
+      </div>
+
+    </div>
+
+    <div class="right">
+      <div class="stream-box">
+        <!-- Twitch Stream Embed -->
         <iframe
-          src="https://player.twitch.tv/?channel=adsonstream&parent=adsonstream.xyz&parent=skylarwas.github.io"
-          frameborder="0"
-          allowfullscreen="true"
-          scrolling="no"
-          height="100%"
-          width="100%">
+          src="https://player.twitch.tv/?channel=AdsOnStream&parent=adsonstream.xyz&parent=skylarwas.github.io&autoplay=true"
+          height="100%" width="100%" allowfullscreen>
+        </iframe>
+      </div>
+      <div class="chat-box">
+        <!-- Twitch Chat Embed -->
+        <iframe
+          src="https://www.twitch.tv/embed/AdsOnStream/chat?parent=adsonstream.xyz&parent=skylarwas.github.io"
+          height="100%" width="100%">
         </iframe>
       </div>
     </div>
-
-    <div class="title">AdsOnStream</div>
-    <div class="subtitle">we only stream ads</div>
-
-    <div class="contact">contact info:</div>
-    <div class="email">ads@adsonstream.xyz</div>
-
   </div>
+
+
+  <!-- Stripe JS -->
+  <script src="https://js.stripe.com/v3"></script>
+
+  <!-- Simple Stripe payment button placeholder -->
+  <script>
+    // Example Stripe setup (client-side placeholder)
+    // You will later replace this with a backend endpoint
+    const stripe = Stripe("pk_test_yourPublicKeyHere");
+
+    function buyAd() {
+      fetch("/create-checkout-session", { method: "POST" })
+        .then(res => res.json())
+        .then(data => stripe.redirectToCheckout({ sessionId: data.id }));
+    }
+  </script>
 </body>
 </html>
