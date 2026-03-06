@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AdsOnStream — Advertise Live for $1</title>
+<title>AdsOnStream — Advertise Live for Free</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -460,10 +460,10 @@
     overflow: hidden;
   }
   .cta-section::before {
-    content: '$1';
+    content: 'FREE';
     position: absolute;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 400px;
+    font-size: 280px;
     color: rgba(255,45,45,0.04);
     top: 50%;
     left: 50%;
@@ -640,13 +640,13 @@
 <div class="ticker-wrap">
   <div class="ticker">
     <span>Your ad. Live on Twitch.</span>
-    <span>Just $1 per play</span>
+    <span>Completely free</span>
     <span>Text · Image · Video</span>
     <span>Seen by real viewers 24/7</span>
     <span>Instant submission</span>
     <span>AI-moderated. Human-reviewed.</span>
     <span>Your ad. Live on Twitch.</span>
-    <span>Just $1 per play</span>
+    <span>Completely free</span>
     <span>Text · Image · Video</span>
     <span>Seen by real viewers 24/7</span>
     <span>Instant submission</span>
@@ -673,13 +673,13 @@
     <h1>
       YOUR AD<br>
       <span class="accent">ON STREAM</span>
-      FOR $1
+      FOR FREE
     </h1>
     <p class="hero-sub">
-      Submit your text, image, or 15-second video. We broadcast it live to real Twitch viewers. One dollar, one play. No minimums, no agencies, no BS.
+      Submit your text, image, or 15-second video. We broadcast it live to real Twitch viewers. Submit your ad and we broadcast it live. No cost, no minimums, no agencies, no BS.
     </p>
     <div class="hero-actions">
-      <a href="#submit" class="btn-primary">Submit Your Ad — $1 →</a>
+      <a href="#submit" class="btn-primary">Submit Your Ad — Free →</a>
       <a href="#how-it-works" class="btn-ghost">See how it works</a>
     </div>
   </div>
@@ -692,7 +692,7 @@
         <div class="ad-card">
           <div class="ad-card-label">Advertisement</div>
           <div class="ad-card-title">Your Brand Here</div>
-          <div class="ad-card-sub">adsonstream.xyz · $1 per play</div>
+          <div class="ad-card-sub">adsonstream.xyz · free to air</div>
           <div class="ad-progress"></div>
         </div>
       </div>
@@ -703,8 +703,8 @@
 <!-- STATS -->
 <div class="stats-row">
   <div class="stat">
-    <div class="stat-num"><span>$</span>1</div>
-    <div class="stat-label">Per ad play</div>
+    <div class="stat-num" style="font-size:36px;padding-top:8px">FREE</div>
+    <div class="stat-label">Per ad submission</div>
   </div>
   <div class="stat">
     <div class="stat-num">24<span>/7</span></div>
@@ -733,8 +733,8 @@
       </div>
       <div class="step">
         <span class="step-num">02</span>
-        <div class="step-title">Pay $1 & Submit</div>
-        <p class="step-desc">Secure checkout via Stripe. One dollar, one play. Want more airtime? Submit multiple times — each gets its own slot in the rotation.</p>
+        <div class="step-title">Submit Your Ad</div>
+        <p class="step-desc">Fill out the form and hit submit. Want more airtime? Submit multiple times — each gets its own slot in the rotation.</p>
       </div>
       <div class="step">
         <span class="step-num">03</span>
@@ -791,8 +791,8 @@
 <!-- CTA -->
 <div class="cta-section">
   <h2>READY TO<br>GO LIVE?</h2>
-  <p>No minimums. No contracts. Just a dollar and your message, broadcast live to real people on Twitch right now.</p>
-  <a href="#submit" class="btn-primary large">Submit Your Ad for $1 →</a>
+  <p>No cost. No contracts. Just your message, broadcast live to real people on Twitch right now.</p>
+  <a href="#submit" class="btn-primary large">Submit Your Ad — Free →</a>
 </div>
 
 <!-- FAQ -->
@@ -811,7 +811,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">Can I run my ad multiple times?</div>
-        <p class="faq-a">Yes. Each $1 submission is one play. Submit the same ad as many times as you want — each gets its own slot in the queue.</p>
+        <p class="faq-a">Yes. Each submission is one play. Submit the same ad as many times as you want — each gets its own slot in the queue.</p>
       </div>
       <div class="faq-item">
         <div class="faq-q">How many viewers will see my ad?</div>
@@ -823,7 +823,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">What happens after my ad plays?</div>
-        <p class="faq-a">It plays once and is removed from the rotation. If you want it to run again, just submit it again for another $1.</p>
+        <p class="faq-a">It plays once and is removed from the rotation. If you want it to run again, just submit it again for free.</p>
       </div>
     </div>
   </div>
@@ -833,7 +833,7 @@
 <div id="submit" style="border-bottom: 1px solid var(--border);">
   <div class="submit-section">
     <div class="section-label" style="margin-bottom: 16px;">Submit Your Ad</div>
-    <h2 style="margin-bottom: 48px;">YOUR AD,<br>$1 TO AIR</h2>
+    <h2 style="margin-bottom: 48px;">YOUR AD,<br>FREE TO AIR</h2>
 
     <!-- TYPE TABS -->
     <div class="type-tabs">
@@ -846,15 +846,15 @@
     <div id="tab-text">
       <div class="form-group">
         <label class="form-label">Headline (max 60 chars)</label>
-        <input type="text" class="form-input" placeholder="Your main message here" maxlength="60">
+        <input type="text" id="headline" class="form-input" placeholder="Your main message here" maxlength="60">
       </div>
       <div class="form-group">
         <label class="form-label">Body Text (max 120 chars)</label>
-        <textarea class="form-textarea" placeholder="Supporting info, tagline, or call to action..." maxlength="120" style="min-height:80px;"></textarea>
+        <textarea id="bodyText" class="form-textarea" placeholder="Supporting info, tagline, or call to action..." maxlength="120" style="min-height:80px;"></textarea>
       </div>
       <div class="form-group">
         <label class="form-label">URL (optional)</label>
-        <input type="url" class="form-input" placeholder="https://yourwebsite.com">
+        <input type="url" id="displayUrl" class="form-input" placeholder="https://yourwebsite.com">
       </div>
     </div>
 
@@ -863,8 +863,8 @@
       <div class="form-group">
         <div class="upload-zone" onclick="document.getElementById('img-upload').click()">
           <span class="upload-zone-icon">⬛</span>
-          <div class="upload-zone-text">Click to upload image<br><span style="opacity:0.5">JPG, PNG, GIF · Min 1280×720 · Max 10MB</span></div>
-          <input type="file" id="img-upload" accept="image/*" style="display:none;">
+          <div class="upload-zone-text" id="img-label">Click to upload image<br><span style="opacity:0.5">JPG, PNG, GIF · Min 1280×720 · Max 10MB</span></div>
+          <input type="file" id="img-upload" accept="image/*" style="display:none;" onchange="document.getElementById('img-label').innerHTML=this.files[0].name">
         </div>
       </div>
     </div>
@@ -874,19 +874,20 @@
       <div class="form-group">
         <div class="upload-zone" onclick="document.getElementById('vid-upload').click()">
           <span class="upload-zone-icon">▶</span>
-          <div class="upload-zone-text">Click to upload video<br><span style="opacity:0.5">MP4, MOV, WEBM · Max 15 seconds · Max 100MB</span></div>
-          <input type="file" id="vid-upload" accept="video/*" style="display:none;">
+          <div class="upload-zone-text" id="vid-label">Click to upload video<br><span style="opacity:0.5">MP4, MOV, WEBM · Max 15 seconds · Max 100MB</span></div>
+          <input type="file" id="vid-upload" accept="video/*" style="display:none;" onchange="document.getElementById('vid-label').innerHTML=this.files[0].name">
         </div>
       </div>
     </div>
 
     <div class="form-group">
       <label class="form-label">Your Email (for confirmation)</label>
-      <input type="email" class="form-input" placeholder="you@example.com">
+      <input type="email" id="email" class="form-input" placeholder="you@example.com">
     </div>
 
-    <a href="#" class="btn-primary large" style="margin-top:8px;">Proceed to Payment — $1 →</a>
-    <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;color:rgba(245,240,232,0.2);margin-top:16px;">Secured by Stripe · All submissions reviewed within 1 hour</p>
+    <div id="submit-msg" style="display:none;padding:14px 18px;margin-bottom:16px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.05em;"></div>
+    <button onclick="submitAd()" id="submit-btn" class="btn-primary large" style="margin-top:8px;border:none;width:100%;cursor:pointer;">Submit Your Ad →</button>
+    <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;color:rgba(245,240,232,0.2);margin-top:16px;">AI-moderated · Human-reviewed · Free to submit</p>
   </div>
 </div>
 
@@ -895,12 +896,16 @@
   <a href="#" class="logo">Ads<span>On</span>Stream</a>
   <div class="footer-right">
     adsonstream.xyz<br>
-    Questions? hello@adsonstream.xyz
+    Questions? <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87efe2ebebe8c7e6e3f4e8e9f4f3f5e2e6eaa9fffefd">[email&#160;protected]</a>
   </div>
 </footer>
 
 <script>
+  const API_BASE = 'http://192.168.7.201:3000';
+  let currentTab = 'text';
+
   function setTab(tab, btn) {
+    currentTab = tab;
     document.getElementById('tab-text').style.display = 'none';
     document.getElementById('tab-image').style.display = 'none';
     document.getElementById('tab-video').style.display = 'none';
@@ -908,7 +913,62 @@
     document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
   }
-</script>
 
+  async function submitAd() {
+    const btn = document.getElementById('submit-btn');
+    const email = document.getElementById('email').value.trim();
+
+    if (!email) { showMsg('Please enter your email.', '#FF2D2D'); return; }
+
+    const formData = new FormData();
+    formData.append('type', currentTab);
+    formData.append('email', email);
+
+    if (currentTab === 'text') {
+      const headline = document.getElementById('headline').value.trim();
+      if (!headline) { showMsg('Please enter a headline.', '#FF2D2D'); return; }
+      formData.append('headline', headline);
+      formData.append('bodyText', document.getElementById('bodyText').value.trim());
+      formData.append('displayUrl', document.getElementById('displayUrl').value.trim());
+    } else if (currentTab === 'image') {
+      const file = document.getElementById('img-upload').files[0];
+      if (!file) { showMsg('Please upload an image.', '#FF2D2D'); return; }
+      formData.append('file', file);
+    } else if (currentTab === 'video') {
+      const file = document.getElementById('vid-upload').files[0];
+      if (!file) { showMsg('Please upload a video.', '#FF2D2D'); return; }
+      formData.append('file', file);
+    }
+
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`${API_BASE}/api/submit`, { method: 'POST', body: formData });
+      const data = await res.json();
+      if (data.success) {
+        showMsg('✓ Submitted! Check your email for confirmation.', '#00FF88');
+        btn.textContent = 'Submitted ✓';
+      } else {
+        showMsg(data.error || 'Something went wrong. Try again.', '#FF2D2D');
+        btn.textContent = 'Submit Your Ad →';
+        btn.disabled = false;
+      }
+    } catch (e) {
+      showMsg('Could not reach the server. Try again later.', '#FF2D2D');
+      btn.textContent = 'Submit Your Ad →';
+      btn.disabled = false;
+    }
+  }
+
+  function showMsg(text, color) {
+    const msg = document.getElementById('submit-msg');
+    msg.textContent = text;
+    msg.style.color = color;
+    msg.style.background = color === '#00FF88' ? 'rgba(0,255,136,0.08)' : 'rgba(255,45,45,0.08)';
+    msg.style.border = '1px solid ' + color + '44';
+    msg.style.display = 'block';
+  }
+</script>
 </body>
 </html>
