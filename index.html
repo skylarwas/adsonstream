@@ -906,6 +906,7 @@
       const file = document.getElementById('img-upload').files[0];
       if (!file) { showMsg('Please upload an image.', '#FF2D2D'); return; }
       formData.append('file', file);
+    }
 
     btn.textContent = 'Submitting…';
     btn.disabled = true;
