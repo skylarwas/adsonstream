@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdsOnStream — Free Twitch Advertising</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0C0C0C;
+    --surface: #141414;
+    --border: rgba(255,255,255,0.07);
+    --text: #F0EDE8;
+    --muted: rgba(240,237,232,0.4);
+    --red: #E8342A;
+    --red-dim: rgba(232,52,42,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 1px solid var(--border); background: rgba(12,12,12,0.9); backdrop-filter: blur(12px); }
+  .nav-logo { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a { font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { background: var(--red) !important; color: var(--text) !important; padding: 8px 20px !important; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 40px 80px; position: relative; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); border: 1px solid rgba(232,52,42,0.3); padding: 6px 14px; margin-bottom: 40px; animation: fadeUp 0.6s ease both; }
+  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse 1.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+  .hero-title { font-size: clamp(56px, 10vw, 110px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.92; margin-bottom: 32px; animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-title em { font-style: normal; color: var(--red); }
+  .hero-sub { font-size: 18px; color: var(--muted); max-width: 480px; line-height: 1.7; margin-bottom: 48px; animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-actions { display: flex; align-items: center; gap: 16px; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; padding: 14px 28px; cursor: pointer; text-decoration: none; transition: all 0.2s; border: none; outline: none; }
+  .btn-primary { background: var(--red); color: var(--text); }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  .hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); animation: fadeUp 0.6s 0.5s ease both; }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--red), transparent); animation: scrollLine 1.5s ease-in-out infinite; }
+  @keyframes scrollLine { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: grid; grid-template-columns: repeat(3, 1fr); }
+  .stat-item { padding: 40px; border-right: 1px solid var(--border); text-align: center; }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-size: 48px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 8px; }
+  .stat-num span { color: var(--red); }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; }
+  .section-title { font-size: clamp(32px, 4vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .section-desc { font-size: 17px; color: var(--muted); max-width: 520px; line-height: 1.7; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 60px; }
+  .step { background: var(--bg); padding: 48px 40px; }
+  .step-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--red); margin-bottom: 24px; }
+  .step-title { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .step-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .formats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 60px; }
+  .format { background: var(--bg); padding: 48px 40px; transition: background 0.2s; }
+  .format:hover { background: var(--surface); }
+  .format-icon { width: 40px; height: 40px; background: var(--red-dim); border: 1px solid rgba(232,52,42,0.2); display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 24px; }
+  .format-title { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .format-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+  .format-specs { display: flex; flex-direction: column; gap: 6px; }
+  .format-spec { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .format-spec::before { content: ''; display: block; width: 16px; height: 1px; background: var(--red); flex-shrink: 0; }
+  .form-section { padding: 100px 40px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .form-wrap { max-width: 600px; margin: 0 auto; }
+  .form-section .section-eyebrow, .form-section .section-title, .form-section .section-desc { text-align: center; }
+  .form-section .section-desc { margin: 0 auto 48px; }
+  .type-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 32px; }
+  .type-tab { background: var(--surface); border: none; padding: 14px; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+  .type-tab:hover { color: var(--text); }
+  .type-tab.active { background: var(--red); color: var(--text); }
+  .form-group { margin-bottom: 20px; }
+  .form-label { display: block; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .form-input, .form-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); font-family: 'Syne', sans-serif; font-size: 15px; padding: 14px 16px; outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
+  .form-input:focus, .form-textarea:focus { border-color: rgba(232,52,42,0.5); }
+  .form-input::placeholder, .form-textarea::placeholder { color: rgba(240,237,232,0.2); }
+  .form-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+  .char-hint { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.05em; margin-top: 6px; text-align: right; }
+  .upload-zone { border: 1px dashed rgba(240,237,232,0.15); padding: 40px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--bg); }
+  .upload-zone:hover { border-color: rgba(232,52,42,0.4); background: var(--red-dim); }
+  .upload-icon { font-size: 28px; margin-bottom: 12px; opacity: 0.4; }
+  .upload-text { font-size: 14px; color: var(--muted); }
+  .upload-text strong { color: var(--text); display: block; margin-bottom: 4px; }
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+  .submit-msg { display: none; padding: 14px 16px; margin-bottom: 20px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.05em; border: 1px solid; }
+  .btn-submit { width: 100%; background: var(--red); color: var(--text); border: none; padding: 16px; font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; transition: opacity 0.2s; }
+  .btn-submit:hover { opacity: 0.85; }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .faq-list { margin-top: 60px; border: 1px solid var(--border); }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 32px 40px; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 680px; }
+  footer { border-top: 1px solid var(--border); padding: 40px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+  .footer-logo span { color: var(--red); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+
+  .stream-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 40px; }
+  .stream-inner { max-width: 1100px; margin: 0 auto; }
+  .stream-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+  .stream-embed { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border: 1px solid var(--border); }
+  .stream-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+  .stream-live-badge { display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); }
+  @media (max-width: 768px) { .stream-section { padding: 60px 24px; } .stream-header { flex-direction: column; align-items: flex-start; } }
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .stats-bar { grid-template-columns: 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+    section { padding: 60px 24px; }
+    .steps { grid-template-columns: 1fr; }
+    .formats { grid-template-columns: 1fr; }
+    .form-section { padding: 60px 24px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Ads<span>On</span>Stream</a>
+  <div class="nav-links">
+    <a href="#watch">Watch</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="#formats">Formats</a>
+    <a href="#faq">FAQ</a>
+    <a href="#submit" class="nav-cta">Submit Ad</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag"><div class="live-dot"></div>Broadcasting 24/7 on Twitch</div>
+  <h1 class="hero-title">Advertise<br>on <em>Twitch.</em><br>For free.</h1>
+  <p class="hero-sub">Submit a text or image ad and we'll broadcast it live to real Twitch viewers. No cost, no account needed, no BS.</p>
+  <div class="hero-actions">
+    <a href="#submit" class="btn btn-primary">Submit your ad →</a>
+    <a href="https://twitch.tv/adsonstream" target="_blank" class="btn btn-ghost">Watch live</a>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">$<span>0</span></div><div class="stat-label">Cost to submit</div></div>
+  <div class="stat-item"><div class="stat-num">15<span>s</span></div><div class="stat-label">Per ad slot</div></div>
+  <div class="stat-item"><div class="stat-num">24<span>/7</span></div><div class="stat-label">Always broadcasting</div></div>
+</div>
+
+
+<div class="stream-section" id="watch">
+  <div class="stream-inner">
+    <div class="stream-header">
+      <div>
+        <div class="section-eyebrow">Live Now</div>
+        <h2 class="section-title" style="margin-bottom:0;">Watch the stream</h2>
+      </div>
+      <div class="stream-live-badge">
+        <div class="live-dot"></div>
+        Broadcasting 24/7
+      </div>
+    </div>
+    <div class="stream-embed">
+      <iframe
+        src="https://player.twitch.tv/?channel=adsonstream&parent=adsonstream.xyz&autoplay=true&muted=true"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<section id="how-it-works">
+  <div class="section-eyebrow">Process</div>
+  <h2 class="section-title">Three steps<br>to go live</h2>
+  <p class="section-desc">From submission to broadcast in under an hour. No approvals needed from agencies, no minimums.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">01 — Submit</div><div class="step-title">Create your ad</div><p class="step-desc">Write a text ad or upload an image. No production experience needed — even a simple message works.</p></div>
+    <div class="step"><div class="step-num">02 — Review</div><div class="step-title">Quick moderation</div><p class="step-desc">We check your ad against Twitch's community guidelines. Most ads are approved within the hour.</p></div>
+    <div class="step"><div class="step-num">03 — Broadcast</div><div class="step-title">Go live on Twitch</div><p class="step-desc">Your ad enters the rotation and plays for 15 seconds to live Twitch viewers. You'll get an email when it's approved.</p></div>
+  </div>
+</section>
+
+<section id="formats" style="padding-top:0;">
+  <div class="section-eyebrow">Ad formats</div>
+  <h2 class="section-title">Two ways<br>to advertise</h2>
+  <p class="section-desc">Choose the format that works best for your message.</p>
+  <div class="formats">
+    <div class="format">
+      <div class="format-icon">T</div>
+      <div class="format-title">Text Ad</div>
+      <p class="format-desc">A headline, subline, and optional URL displayed full-screen on stream.</p>
+      <div class="format-specs">
+        <div class="format-spec">Up to 60 character headline</div>
+        <div class="format-spec">Up to 120 character body</div>
+        <div class="format-spec">Optional URL display</div>
+      </div>
+    </div>
+    <div class="format">
+      <div class="format-icon">⬜</div>
+      <div class="format-title">Image Ad</div>
+      <p class="format-desc">A full-screen image shown directly on the stream. Great for visual brands.</p>
+      <div class="format-specs">
+        <div class="format-spec">PNG, JPG, GIF accepted</div>
+        <div class="format-spec">Max 10MB file size</div>
+        <div class="format-spec">Recommended 16:9 ratio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="form-section" id="submit">
+  <div class="form-wrap">
+    <div class="section-eyebrow">Submit</div>
+    <h2 class="section-title">Ready to go live?</h2>
+    <p class="section-desc">Fill out the form below. It takes less than a minute.</p>
+    <div class="type-tabs">
+      <button class="type-tab active" onclick="setTab('text', this)">Text Ad</button>
+      <button class="type-tab" onclick="setTab('image', this)">Image Ad</button>
+    </div>
+    <div id="tab-text">
+      <div class="form-group">
+        <label class="form-label">Headline *</label>
+        <input type="text" id="headline" class="form-input" placeholder="Your main message here" maxlength="60">
+        <div class="char-hint">Max 60 characters</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Body text</label>
+        <textarea id="bodyText" class="form-textarea" placeholder="Supporting info, tagline, or call to action..." maxlength="120"></textarea>
+        <div class="char-hint">Max 120 characters</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Display URL</label>
+        <input type="url" id="displayUrl" class="form-input" placeholder="https://yourwebsite.com">
+      </div>
+    </div>
+    <div id="tab-image" style="display:none;">
+      <div class="form-group">
+        <div class="upload-zone" onclick="document.getElementById('img-upload').click()">
+          <div class="upload-icon">↑</div>
+          <div class="upload-text">
+            <strong id="img-label">Click to upload image</strong>
+            PNG, JPG, GIF · Max 10MB
+          </div>
+          <input type="file" id="img-upload" accept="image/*" style="display:none;" onchange="document.getElementById('img-label').textContent=this.files[0].name">
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="form-group">
+      <label class="form-label">Your email *</label>
+      <input type="email" id="email" class="form-input" placeholder="you@example.com">
+      <div class="char-hint">We'll notify you when your ad is approved</div>
+    </div>
+    <div class="submit-msg" id="submit-msg"></div>
+    <button class="btn-submit" onclick="submitAd()" id="submit-btn">Submit Your Ad →</button>
+  </div>
+</div>
+
+<section id="faq">
+  <div class="section-eyebrow">FAQ</div>
+  <h2 class="section-title">Questions?</h2>
+  <div class="faq-list">
+    <div class="faq-item"><div class="faq-q">Is this actually free?</div><p class="faq-a">Yes, completely. No hidden costs, no account required, no credit card. Just submit and we broadcast it.</p></div>
+    <div class="faq-item"><div class="faq-q">How long until my ad goes live?</div><p class="faq-a">Most ads are reviewed and approved within 1 hour. You'll receive an email when your ad enters the rotation.</p></div>
+    <div class="faq-item"><div class="faq-q">What can't I advertise?</div><p class="faq-a">Anything that violates Twitch's community guidelines — adult content, hate speech, illegal products, gambling, or misleading claims. We review every submission before it goes live.</p></div>
+    <div class="faq-item"><div class="faq-q">How many times will my ad play?</div><p class="faq-a">Each submission plays once in the rotation. Submit again to get more airtime.</p></div>
+    <div class="faq-item"><div class="faq-q">Can I submit multiple ads?</div><p class="faq-a">Yes — just submit the form again with a new ad. Each submission is reviewed independently.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Ads<span>On</span>Stream</div>
+  <div class="footer-links">
+    <a href="https://twitch.tv/adsonstream" target="_blank">Watch Live</a>
+    <a href="https://social.adsonstream.xyz" target="_blank">Socials</a>
+    <a href="#submit">Submit Ad</a>
+    <a href="/cdn-cgi/l/email-protection#1c74797070735c7d786f73726f686e797d7132646566">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 AdsOnStream</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const API_BASE = 'https://api.adsonstream.xyz';
+  let currentTab = 'text';
+
+  function setTab(tab, btn) {
+    currentTab = tab;
+    document.getElementById('tab-text').style.display = 'none';
+    document.getElementById('tab-image').style.display = 'none';
+    document.getElementById('tab-' + tab).style.display = 'block';
+    document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  async function submitAd() {
+    const btn = document.getElementById('submit-btn');
+    const email = document.getElementById('email').value.trim();
+    if (!email) { showMsg('Please enter your email.', false); return; }
+
+    const formData = new FormData();
+    formData.append('type', currentTab);
+    formData.append('email', email);
+
+    if (currentTab === 'text') {
+      const headline = document.getElementById('headline').value.trim();
+      if (!headline) { showMsg('Please enter a headline.', false); return; }
+      formData.append('headline', headline);
+      formData.append('bodyText', document.getElementById('bodyText').value.trim());
+      formData.append('displayUrl', document.getElementById('displayUrl').value.trim());
+    } else if (currentTab === 'image') {
+      const file = document.getElementById('img-upload').files[0];
+      if (!file) { showMsg('Please upload an image.', false); return; }
+      formData.append('file', file);
+    }
+
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(API_BASE + '/api/submit', { method: 'POST', body: formData });
+      const data = await res.json();
+      if (data.success) {
+        showMsg('✓ Submitted! Check your email for confirmation.', true);
+        btn.textContent = 'Submitted ✓';
+      } else {
+        showMsg(data.error || 'Something went wrong. Try again.', false);
+        btn.textContent = 'Submit Your Ad →';
+        btn.disabled = false;
+      }
+    } catch (e) {
+      showMsg('Could not reach the server. Try again later.', false);
+      btn.textContent = 'Submit Your Ad →';
+      btn.disabled = false;
+    }
+  }
+
+  function showMsg(text, success) {
+    const msg = document.getElementById('submit-msg');
+    msg.textContent = text;
+    msg.style.color = success ? '#4ade80' : '#E8342A';
+    msg.style.background = success ? 'rgba(74,222,128,0.06)' : 'rgba(232,52,42,0.06)
