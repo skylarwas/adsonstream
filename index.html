@@ -411,6 +411,7 @@
     .taskbar-item { display: none; }
   }
 </style>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -602,6 +603,7 @@
     </div>
 
     <div class="submit-msg" id="submit-msg"></div>
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAACocO9BpPTxVhvqE" data-theme="light" style="margin-bottom:8px;"></div>
     <button class="submit-btn" onclick="submitAd()" id="submit-btn">OK — Submit My Ad (its free)</button>
   </div>
 </div>
@@ -698,9 +700,14 @@
     const email = document.getElementById('email').value.trim();
     if (!email) { showMsg('hey!! put ur email in ok', false); return; }
 
+    // Verify Turnstile
+    const turnstileToken = document.querySelector('[name=cf-turnstile-response]')?.value;
+    if (!turnstileToken) { showMsg('please complete the captcha first!!', false); return; }
+
     const formData = new FormData();
     formData.append('type', currentTab);
     formData.append('email', email);
+    formData.append('cf-turnstile-response', turnstileToken);
 
     if (currentTab === 'text') {
       const headline = document.getElementById('headline').value.trim();
