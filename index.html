@@ -728,7 +728,7 @@
       const res = await fetch(API_BASE + '/api/submit', { method: 'POST', body: formData });
       const data = await res.json();
       if (data.success) {
-        showMsg('✓ Submitted!! check ur email :) it was free btw', true);
+        showMsg('✓ Submitted!! now wait pls lol :3', true);
         btn.textContent = 'Submitted ✓ nice job';
       } else {
         showMsg(data.error || 'something broke lol try again', false);
