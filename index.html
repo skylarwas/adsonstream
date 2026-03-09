@@ -597,7 +597,7 @@
 
     <div class="email-row">
       <div class="form-row" style="margin-bottom:0;">
-        <label class="form-lbl">Your email * (so we can tell u when it goes live)</label>
+        <label class="form-lbl">Your email (optional — so we can tell u when it goes live)</label>
         <input type="email" id="email" class="form-input" placeholder="ur@email.com">
       </div>
     </div>
@@ -698,7 +698,7 @@
   async function submitAd() {
     const btn = document.getElementById('submit-btn');
     const email = document.getElementById('email').value.trim();
-    if (!email) { showMsg('hey!! put ur email in ok', false); return; }
+    // email is optional
 
     // Verify Turnstile
     const turnstileToken = document.querySelector('[name=cf-turnstile-response]')?.value;
@@ -706,7 +706,7 @@
 
     const formData = new FormData();
     formData.append('type', currentTab);
-    formData.append('email', email);
+    if (email) formData.append('email', email);
     formData.append('cf-turnstile-response', turnstileToken);
 
     if (currentTab === 'text') {
